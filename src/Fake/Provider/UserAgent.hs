@@ -3,7 +3,6 @@
 module Fake.Provider.UserAgent where
 
 ------------------------------------------------------------------------------
-import Data.Monoid
 import Data.Time
 import Text.Printf
 ------------------------------------------------------------------------------

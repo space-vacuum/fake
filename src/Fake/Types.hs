@@ -9,15 +9,14 @@ newtype FGen a = MkFGen { unFGen :: StdGen -> a }
 
 instance Functor FGen where
   fmap f (MkFGen h) =
-    MkFGen (\r -> f (h r))
+    MkFGen (f . h)
 
 instance Applicative FGen where
-  pure  = return
+  pure x =
+    MkFGen (const x)
   (<*>) = ap
 
 instance Monad FGen where
-  return x =
-    MkFGen (\_ -> x)
 
   MkFGen m >>= k =
     MkFGen (\r ->
@@ -31,5 +30,4 @@ instance Monad FGen where
 -- | Run a generator to generate a random value in the IO monad.
 generate :: FGen a -> IO a
 generate (MkFGen g) = do
-    r <- newStdGen
-    return (g r)
+    g <$> newStdGen

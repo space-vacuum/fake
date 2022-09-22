@@ -5,7 +5,6 @@ module Fake.Provider.Locale
 
 ------------------------------------------------------------------------------
 import qualified Data.Map as M
-import           Data.Monoid
 ------------------------------------------------------------------------------
 import           Fake.Combinators
 import           Fake.Types
